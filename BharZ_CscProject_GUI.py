@@ -50,6 +50,3 @@ label.pack()
 win.after(0, update, 0)
 
 win.mainloop()
-
-
-
