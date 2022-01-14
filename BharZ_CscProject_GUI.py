@@ -3,7 +3,7 @@ import tkinter
 import tkinter.font
 win=tkinter.Tk()
 win.title("The Bois Password Manager")
-win.geometry("918x450")
+win.geometry("920x640")
 win['bg']='black'
 Headin_text=tkinter.Label(text="The Bois password manager Login Portal",
 fg="green",bg="black")
@@ -22,7 +22,7 @@ entry1.place(x=100,y=50)
 text2=tkinter.Label(win,text="Master Password:",fg="green",bg="black")
 text2.pack(pady=20,side=tkinter.TOP,anchor="w")
 text2.configure(font=Custom_Font1)
-entry2=tkinter.Entry(fg="black", bg="#64f586", width=50)
+entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
 entry2.place(x=180,y=120)
 Username=entry1.get()
 Password=entry2.get()
@@ -33,7 +33,7 @@ Login_button= tkinter.Button(
     bg="#61ff96",
     fg="black",
 )
-direc="images\matrix.gif.gif"
+direc="images\matrix.gif"
 Login_button.pack()
 frameCnt = 20
 frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
