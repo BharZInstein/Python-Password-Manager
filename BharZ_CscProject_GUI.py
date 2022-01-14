@@ -33,7 +33,7 @@ Login_button= tkinter.Button(
     bg="#61ff96",
     fg="black",
 )
-direc="D:\ALPHA\Python\ProgZ\BharZ_Csc Project GUI\matrix.gif.gif"
+direc="images\matrix.gif.gif"
 Login_button.pack()
 frameCnt = 20
 frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
