@@ -1,4 +1,5 @@
 from tkinter import *
+from Random_Password import *
 def add():
     wim=Tk()
     wim.title("The Bois Password Manager")
@@ -21,12 +22,11 @@ def add():
     pas_entry=Entry(wim,width=50)
     pas_entry.place(x=120,y=168)
 
-    pas_gen=Button(wim,text="Password Generator")
+    pas_gen=Button(wim,text="Password Generator", command=randpass)
     pas_gen.place(x=440,y=165)
 
     web_text=Label(wim, text="Website name:")
     web_text.place(x=5,y=225)
     web_entry=Entry(wim,width=50)
     web_entry.place(x=150,y=225)
-    
     wim.mainloop()

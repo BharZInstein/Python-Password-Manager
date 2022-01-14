@@ -1,6 +1,5 @@
 from tkinter import *
 from sub_menu_grps import add
-
 win=Tk()
 win.title("The Bois Password Manager")
 win.geometry("920x640")

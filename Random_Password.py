@@ -9,6 +9,4 @@ def randpass():
           for x in range(0,password_len):
                password_chars = random.choice(chars)
                password = password + password_chars
-          return password
-
-print(randpass())          
+          return password          
