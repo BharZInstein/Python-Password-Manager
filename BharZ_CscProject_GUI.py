@@ -5,6 +5,8 @@ win=tkinter.Tk()
 win.title("The Bois Password Manager")
 win.geometry("920x640")
 win['bg']='black'
+icon= tkinter.PhotoImage(file="images\icon_2.png")
+win.iconphoto(False, icon)
 Headin_text=tkinter.Label(text="The Bois password manager Login Portal",
 fg="green",bg="black")
 Headin_text.pack()

@@ -5,6 +5,8 @@ win=tkinter.Tk()
 win.title("The Bois Password Manager")
 win.geometry("920x640")
 win['bg']='black'
+icon= tkinter.PhotoImage(file="images\icon_2.png")
+win.iconphoto(False, icon)
 title_text=tkinter.Label(text="HOMEPAGE",bg="black",fg="green")
 Custom_Font1=tkinter.font.Font(family="Ancient Modern Tales",size=64,)
 title_text.pack(pady=100)
