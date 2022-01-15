@@ -1,4 +1,5 @@
 import random
+import pyperclip
 def randpass():
 
      chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!$#()*&1234567890"

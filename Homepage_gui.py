@@ -1,6 +1,8 @@
 import tkinter
 from Homepage_grps import add
 import tkinter
+import string
+
 win=tkinter.Tk()
 win.title("The Bois Password Manager")
 win.geometry("920x640")
