@@ -75,7 +75,8 @@ def add():
     web_text.place(x=5,y=225)
     web_entry=tkinter.Entry(wim,width=50,fg="black", bg="#64f586")
     web_entry.place(x=150,y=225)
-    
-    
-
+    usr=usr_entry.get()
+    url=url_entry.get()
+    pas=pas_entry.get()
+    name=web_entry.get()
     wim.mainloop()
