@@ -27,7 +27,7 @@ text2.configure(font=Custom_Font1)
 entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
 entry2.place(x=180,y=120)
 Username=entry1.get()
-Password=entry2.get()
+M_Password=entry2.get()
 Login_button= tkinter.Button(
     text="Login",
     width=10,

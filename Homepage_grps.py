@@ -4,7 +4,10 @@ import random
 import pyperclip
 import string
 from random_password_gen import randpass
-
+url=''
+usr=''
+password=''
+website_name=''
 
 
 def add():
@@ -47,6 +50,10 @@ def add():
     web_entry.place(x=150,y=225)
     Go_Button=tkinter.Button(wim,text="ADD",bg="#00ff95",fg="green",width=25,height=2,activebackground='#64f586')
     Go_Button.place(x=150,y=275)
+    url=url_entry.get()
+    usre=usr_entry.get()
+    password=pas_entry.get()
+    website_name=web_entry,get()
     
     
 
