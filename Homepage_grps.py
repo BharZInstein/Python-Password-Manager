@@ -3,37 +3,15 @@ import tkinter.font
 import random
 import pyperclip
 import string
-
+from random_password_gen import randpass
 
 
 
 def add():
-    def randpass():
-        length = 6
-
-        small = string.ascii_lowercase 
-        big = string.ascii_uppercase
-        dig = string.digits
-        symbols = string.punctuation
-
-        TPass1 = random.sample(small,1)
-        TPass2 = random.sample(big,1)
-        TPass3 = random.sample(dig,1) 
-        TPass4 = random.sample(symbols,1)
-
-        LPass = TPass1 + TPass2 + TPass3 + TPass4
-
-        All = small + big + dig + symbols   
-
-        BPass = random.sample(All,length)
-
-        Pass = LPass + BPass
-        random.shuffle(Pass)
-
-        Password = "" .join(Pass)
-
-        pas_entry.insert(0, Password)
-        pyperclip.copy(Password)
+    def random_password():
+        password=randpass()
+        pas_entry.insert(0, password)
+        pyperclip.copy(password)
     
     wim=tkinter.Tk()
     wim['bg']='black'
@@ -60,7 +38,7 @@ def add():
     pas_text.place(x=5,y=168)
     pas_entry=tkinter.Entry(wim,width=50,fg="black", bg="#64f586")
     pas_entry.place(x=150,y=168)
-    pas_gen=tkinter.Button(wim,text="Password Generator",bg="black",fg="green",activebackground='#64f586', command=randpass)
+    pas_gen=tkinter.Button(wim,text="Password Generator",bg="black",fg="green",activebackground='#64f586', command=random_password)
     pas_gen.place(x=460,y=165)
 
     web_text=tkinter.Label(wim, text="Website name:",bg="black",fg="green")
