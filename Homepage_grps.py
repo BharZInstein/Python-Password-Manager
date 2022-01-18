@@ -9,19 +9,31 @@ import string
 
 def add():
     def randpass():
-        length = 10
+        length = 6
+
         small = string.ascii_lowercase 
         big = string.ascii_uppercase
         dig = string.digits
         symbols = string.punctuation
 
-        all = small + big + dig + symbols
+        TPass1 = random.sample(small,1)
+        TPass2 = random.sample(big,1)
+        TPass3 = random.sample(dig,1) 
+        TPass4 = random.sample(symbols,1)
 
-        Pass = random.sample(all,length)
+        LPass = TPass1 + TPass2 + TPass3 + TPass4
 
-        password = "".join(Pass)
-        pas_entry.insert(0, password)
-        pyperclip.copy(password)
+        All = small + big + dig + symbols   
+
+        BPass = random.sample(All,length)
+
+        Pass = LPass + BPass
+        random.shuffle(Pass)
+
+        Password = "" .join(Pass)
+
+        pas_entry.insert(0, Password)
+        pyperclip.copy(Password)
     
     wim=tkinter.Tk()
     wim['bg']='black'
