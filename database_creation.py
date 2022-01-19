@@ -22,4 +22,3 @@ c.execute("""CREATE TABLE IF NOT EXISTS user_data_storage(
 conn.commit()
 
 conn.close()
-

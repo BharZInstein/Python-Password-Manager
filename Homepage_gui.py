@@ -1,9 +1,12 @@
 import tkinter
 import tkinter.font
 from subprocess import call
+from usr import usrCall
 def addEntry():
     call(["python", "Homepage_grps.py"])
 win=tkinter.Tk()
+usr1=usrCall()
+print(usr1)
 win.title("The Bois Password Manager")
 win.geometry("920x640")
 win['bg']='black'

@@ -5,6 +5,7 @@ import sqlite3
 from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
+from usr import usrStore, usrCall
 M_username=None
 M_password=None
 def login(username,password):
@@ -83,7 +84,24 @@ def signUp_Command():
     signUp_button.pack(pady=5)
     root.mainloop()
 def Login():
-    call(["python", "Homepage_gui.py"])
+    global username
+    global password
+    username=entry1.get()
+    password=entry2.get()
+    password=make_pw_hash(password)
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    c.execute("SELECT M_username from user_data WHERE M_username=? AND master_pwd=?", (username,password,))
+    rows=c.fetchall()
+    if rows==[]:
+        wrg=tkinter.Label(win,text="*Wrong Username/Password",fg="red",bg="black")
+        wrg.place(x=500,y=120)
+    else:
+        username=rows[0][0]
+        usrStore(username)
+        call(["python", "Homepage_gui.py"])
+    conn.close()
+
 win=tkinter.Tk()
 win.title("The Bois Password Manager - Login")
 win.geometry("920x640")
@@ -109,8 +127,8 @@ text2.pack(pady=20,side=tkinter.TOP,anchor="w")
 text2.configure(font=Custom_Font1)
 entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
 entry2.place(x=180,y=120)
-username=entry1.get()
-password=entry2.get()
+username=None
+password=None
 #Login button
 Login_button= tkinter.Button(
     text="Login",
@@ -129,8 +147,8 @@ signUp_button= tkinter.Button(
     command = signUp_Command
 )
 signUp_button.pack()
-direc="images\matrix.gif"
 Login_button.pack()
+'''direc="images\matrix.gif"
 frameCnt = 20
 frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
 def update(ind):
@@ -143,6 +161,6 @@ def update(ind):
     win.after(100, update, ind)
 label = tkinter.Label(win)
 label.pack()
-win.after(0, update, 0)
+win.after(0, update, 0)'''
 
 win.mainloop()

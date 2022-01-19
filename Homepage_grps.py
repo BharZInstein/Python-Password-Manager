@@ -10,7 +10,7 @@ usr=None
 password=None
 website_name=None
 def password_gen():
-    password=passgen()
+    password=passgen() 
     pas_entry.insert(0, password)
     pyperclip.copy(password)
 
