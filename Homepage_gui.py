@@ -1,7 +1,8 @@
 import tkinter
-from Homepage_grps import add
-import tkinter
-
+import tkinter.font
+from subprocess import call
+def addEntry():
+    call(["python", "Homepage_grps.py"])
 win=tkinter.Tk()
 win.title("The Bois Password Manager")
 win.geometry("920x640")
@@ -16,10 +17,8 @@ Headin_text=tkinter.Label(text="----Choose an Option----",bg="black",fg="green")
 Custom_Font2=tkinter.font.Font(family="Consolas",size=14,weight="bold")
 Headin_text.configure(font=Custom_Font2)
 Headin_text.pack()
-ADD=tkinter.Button(text="Add new Password",width=20,height=2, bg="black",fg="green", activebackground='#64f586',command=add)
-ADD.pack(pady=50)
+add=tkinter.Button(text="Add new Password",width=20,height=2, bg="black",fg="green", activebackground='#64f586',command=addEntry)
+add.pack(pady=50)
 see=tkinter.Button(text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
 see.pack()
-search=tkinter.Button(text="Search Your Entry",width=20,height=2,bg="black",fg="green", activebackground='#64f586')
-search.pack(pady=50)
 win.mainloop()

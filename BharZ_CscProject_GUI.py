@@ -2,8 +2,63 @@
 import tkinter
 import tkinter.font
 import sqlite3
+from hashing import make_pw_hash, check_pw_hash
+from subprocess import call
+from hashing import make_pw_hash, check_pw_hash
+M_username=None
+M_password=None
+def login(username,password):
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    
+   
+    c.execute("INSERT INTO user_data VALUES(:username, :master_pwd)",
+            {
+                'username': username,
+                'master_pwd': password,
+            })
+
+    conn.commit() 
+    conn.close()
+
+def signUp_Command():
+    def signUp():
+        global M_username
+        global M_password
+        M_username=user_name_entry.get()
+        M_password=pass_word_entry.get()
+        M_password=make_pw_hash(M_password)
+        login(M_username,M_password)
+        return None
+    root=tkinter.Tk()
+    root.title("The Bois Password Manager - SignUp")
+    root['bg']='black'
+    Headin_text=tkinter.Label(root,text="SignUp",
+    fg="green",bg="black")
+    Headin_text.pack()
+    Custom_Font=tkinter.font.Font( family = "Pixeboy", 
+                                 size = 25, 
+                                 )
+    Headin_text.configure(font=Custom_Font)
+    user_name=tkinter.Label(root,text="Username:",fg="green",bg="black")
+    Custom_Font1=tkinter.font.Font(family="Consolas",size=15)
+    user_name.configure(font=Custom_Font1)
+    user_name.pack()
+    user_name_entry = tkinter.Entry(root,fg="black", bg="#64f586", width=50)
+    user_name_entry.pack()
+
+    pass_word=tkinter.Label(root,text="Master Password:",fg="green",bg="black")
+    pass_word.pack()
+    pass_word.configure(font=Custom_Font1)
+    pass_word_entry=tkinter.Entry(root,show="*",fg="black", bg="#64f586", width=50)
+    pass_word_entry.pack()
+    signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp)
+    signUp_button.pack(pady=5)
+    root.mainloop()
+def Login():
+    call(["python", "Homepage_gui.py"])
 win=tkinter.Tk()
-win.title("The Bois Password Manager")
+win.title("The Bois Password Manager - Login")
 win.geometry("920x640")
 win['bg']='black'
 icon= tkinter.PhotoImage(file="images\icon_2.png")
@@ -27,34 +82,26 @@ text2.pack(pady=20,side=tkinter.TOP,anchor="w")
 text2.configure(font=Custom_Font1)
 entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
 entry2.place(x=180,y=120)
-Username=entry1.get()
-M_Password=entry2.get()
-
-def login():
-    conn = sqlite3.connect('pass_manager.db')
-    c = conn.cursor()
-    
-   
-    c.execute("INSERT INTO user_data VALUES(:username, :master_pwd)",
-            {
-                'username': Username,
-                'master_pwd': M_Password,
-            })
-
-    conn.commit() 
-    conn.close()
-
-    entry1.delete(0,"end")
-    entry2.delete(0,"end")
-
+username=entry1.get()
+password=entry2.get()
+#Login button
 Login_button= tkinter.Button(
     text="Login",
     width=10,
     height=2,
     bg="#61ff96",
     fg="black",
-    command = login
+    command=Login
 )
+signUp_button= tkinter.Button(
+    text="SignUp",
+    width=10,
+    height=2,
+    bg="#61ff96",
+    fg="black",
+    command = signUp_Command
+)
+signUp_button.pack()
 direc="images\matrix.gif"
 Login_button.pack()
 frameCnt = 20

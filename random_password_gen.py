@@ -1,6 +1,6 @@
 import random
 import string
-def randpass(): 
+def passgen(): 
     length = 6
 
     small = string.ascii_lowercase 
@@ -24,8 +24,3 @@ def randpass():
 
     Password = "" .join(Pass)
     return Password
-
-
-
-
-
