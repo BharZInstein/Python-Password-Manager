@@ -9,12 +9,37 @@ M_username=None
 M_password=None
 def login(username,password):
     conn = sqlite3.connect('pass_manager.db')
+
+    c = conn.cursor()
+
+    c.execute("""CREATE TABLE IF NOT EXISTS user_data(
+            username TEXT(20),
+            master_pwd TEXT(20),
+            PRIMARY KEY(username)
+        )""")
+
+    c.execute("""CREATE TABLE IF NOT EXISTS user_data_storage(
+            serial_no INTEGER,
+            username TEXT(20),
+            url TEXT,
+            user_name TEXT,
+            service_pwd TEXT,
+            website_name TEXT,
+            PRIMARY KEY(serial_no)
+            FOREIGN KEY(username)
+                REFERENCES user_data(username)
+        )""")
+
+    conn.commit()
+
+    conn.close()
+    conn = sqlite3.connect('pass_manager.db')
     c = conn.cursor()
     
    
-    c.execute("INSERT INTO user_data VALUES(:username, :master_pwd)",
+    c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
             {
-                'username': username,
+                'M_username': username,
                 'master_pwd': password,
             })
 
@@ -29,6 +54,8 @@ def signUp_Command():
         M_password=pass_word_entry.get()
         M_password=make_pw_hash(M_password)
         login(M_username,M_password)
+        en=tkinter.Label(root,text="*Account Created Successfully",fg="red",bg="black")
+        en.pack()
         return None
     root=tkinter.Tk()
     root.title("The Bois Password Manager - SignUp")
@@ -117,31 +144,5 @@ def update(ind):
 label = tkinter.Label(win)
 label.pack()
 win.after(0, update, 0)
-
-conn = sqlite3.connect('pass_manager.db')
-
-c = conn.cursor()
-
-c.execute("""CREATE TABLE IF NOT EXISTS user_data(
-        username TEXT(20),
-        master_pwd TEXT(20),
-        PRIMARY KEY(username)
-    )""")
-
-c.execute("""CREATE TABLE IF NOT EXISTS user_data_storage(
-        serial_no INTEGER,
-        username TEXT(20),
-        url TEXT,
-        user_name TEXT,
-        service_pwd TEXT,
-        website_name TEXT,
-        PRIMARY KEY(serial_no)
-        FOREIGN KEY(username)
-            REFERENCES user_data(username)
-    )""")
-
-conn.commit()
-
-conn.close()
 
 win.mainloop()

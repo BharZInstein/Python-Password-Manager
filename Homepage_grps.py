@@ -5,25 +5,42 @@ import pyperclip
 import string
 import sqlite3
 from random_password_gen import passgen
-
+url=None
+usr=None
+password=None
+website_name=None
 def password_gen():
     password=passgen()
     pas_entry.insert(0, password)
     pyperclip.copy(password)
 
-def addEntry(website_name,user_name,url,service_password):
+def addEntry_DB(website_name,user_name,url,service_password):
     conn= sqlite3.connect('pass_manager.db')
     c=conn.cursor()
 
-    c.execute("INSERT INTO user_data_storage(:serial_no,:url,:user_name ,:service_pwd,:website_name)",
+    c.execute("INSERT INTO user_data_storage VALUES(:url, :user_name, :service_pwd, :website_name)",
             {
                 'website_name': website_name,
-                'user_namee': user_name,
+                'user_name': user_name,
                 'url':url,
                 'service_pwd': service_password,
             })
     conn.commit()
     conn.close()
+
+def addEntry():
+    global url
+    global usr
+    global password
+    global website_name
+    url=url_entry.get()
+    usr=usr_entry.get()
+    password=pas_entry.get()
+    website_name=web_entry.get()
+    addEntry_DB(website_name,usr,url,password)
+    an=tkinter.Label(wim,text="*Successfully Added",bg="black",fg="red")
+    an.place(x=5,y=290)
+    return None
 
 wim=tkinter.Tk()
 wim['bg']='black'
@@ -59,13 +76,7 @@ web_text=tkinter.Label(wim, text="Website name:",bg="black",fg="green")
 web_text.place(x=5,y=225)
 web_entry=tkinter.Entry(wim,width=50,fg="black", bg="#64f586")
 web_entry.place(x=150,y=225)
-Go_Button=tkinter.Button(wim,text="ADD",bg="#00ff95",fg="green",width=25,height=2,activebackground='#64f586')
+Go_Button=tkinter.Button(wim,text="ADD",bg="#00ff95",fg="green",width=25,height=2,activebackground='#64f586', command=addEntry)
 Go_Button.place(x=150,y=275)
-
-url=url_entry.get()
-usr=usr_entry.get()
-password=pas_entry.get()
-website_name=web_entry.get()
-
 
 wim.mainloop()
