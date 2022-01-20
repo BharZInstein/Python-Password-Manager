@@ -63,6 +63,8 @@ def signUp_Command():
     root['bg']='black'
     Headin_text=tkinter.Label(root,text="SignUp",
     fg="green",bg="black")
+    Font23=Custom_Font1=tkinter.font.Font(family="Ancient Modern Tales",size=25)
+    Headin_text.configure(font=Font23)
     Headin_text.pack()
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
                                  size = 25, 
