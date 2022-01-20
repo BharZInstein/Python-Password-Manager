@@ -9,6 +9,7 @@ url=None
 usr=None
 password=None
 website_name=None
+m_usr=None
 def password_gen():
     password=passgen() 
     pas_entry.insert(0, password)
@@ -18,13 +19,15 @@ def addEntry_DB(website_name,user_name,url,service_password):
     conn= sqlite3.connect('pass_manager.db')
     c=conn.cursor()
 
-    c.execute("INSERT INTO user_data_storage VALUES(:url, :user_name, :service_pwd, :website_name)",
-            {
-                'website_name': website_name,
-                'user_name': user_name,
-                'url':url,
-                'service_pwd': service_password,
-            })
+    c.execute("INSERT INTO user_data_storage VALUES( :M_username, :url, :user_name, :service_pwd, :website_name)",
+                {
+                    'M_username': m_usr,
+                    'url':url,
+                    'user_name': user_name,
+                    'service_pwd': service_password,
+                    'website_name': website_name,
+                    
+                })
     conn.commit()
     conn.close()
 
@@ -46,8 +49,6 @@ wim=tkinter.Tk()
 wim['bg']='black'
 wim.title("The Bois Password Manager - Add A New Password")
 wim.geometry("920x640")
-icon= tkinter.PhotoImage(file="images\icon_2.png")
-wim.iconphoto(False, icon)
 Headin_text=tkinter.Label(wim,text="The Bois password manager",bg="black",fg="green")
 Custom_Font=tkinter.font.Font( family = "Pixeboy", 
                                 size = 25, 

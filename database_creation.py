@@ -11,7 +11,6 @@ c.execute("""CREATE TABLE IF NOT EXISTS user_data(
     )""")
 
 c.execute("""CREATE TABLE IF NOT EXISTS user_data_storage(
-        s_no INTEGER PRIMARY KEY AUTOINCREMENT,
         M_username TEXT(20) NOT NULL,
         url TEXT NOT NULL,
         user_name TEXT NOT NULL, 
