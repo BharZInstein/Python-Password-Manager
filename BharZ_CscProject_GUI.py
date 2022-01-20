@@ -150,7 +150,7 @@ signUp_button= tkinter.Button(
 )
 signUp_button.pack()
 Login_button.pack()
-'''direc="images\matrix.gif"
+direc="images\matrix.gif"
 frameCnt = 20
 frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
 def update(ind):
@@ -163,6 +163,6 @@ def update(ind):
     win.after(100, update, ind)
 label = tkinter.Label(win)
 label.pack()
-win.after(0, update, 0)'''
+win.after(0, update, 0)
 
 win.mainloop()
