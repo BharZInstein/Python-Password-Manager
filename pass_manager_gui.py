@@ -1,7 +1,5 @@
 #GUI FOR CSC PROJECT by Bharghav
 #If your datbase file is empty run the databse_creation.py file
-def showZ():
-        show=False
 import tkinter
 import tkinter.font
 import sqlite3
@@ -12,21 +10,69 @@ from random_password_gen import passgen
 from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
+from functools import partial
 M_password=None
+M_username=None
 url=None
 usr=None
-password=None
 website_name=None
 m_username=None
-home=tkinter.Tk()
-home.title("The Bois Password Manager")
-home.geometry("920x640")
-icon= tkinter.PhotoImage(file="images\icon_2.png")
-home.iconphoto(False, icon)
+username=None
+password=None
+search=None
+#search data
+def search_db(m_username,website_name):
+    Entry_Font=tkinter.font.Font(size=15)
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM user_data_storage WHERE M_username=? AND website_name=? ", (m_username,website_name,))
+    rows=c.fetchall()
+    if (rows!=[]):
+        i=0
+        y=0
+        while True:
+            c.execute("SELECT * FROM user_data_storage WHERE M_username=? AND website_name=? ", (m_username,website_name,))
+            array=c.fetchall()
 
-#login GUI
-def loginPage():
-    def signUp(username,password):
+            lbl=tkinter.Label(home,text=(array[i][4]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=88,y=y+199)
+            lbl=tkinter.Label(home,text=(array[i][2]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=378,y=y+190)
+            lbl=tkinter.Label(home,text=(array[i][3]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=650,y=y+190)
+
+            delbt=tkinter.Button(home,text='Delete',bg="#000000", fg='green',activebackground='#64f586',command= partial(delete_data, array[i][0], array[0][2],array[0][3],array[0][4]))
+            delbt.place(x=870,y=y+190)
+            i=i+1
+            y=y+50
+
+            c.execute("SELECT * FROM user_data_storage WHERE M_username=? AND website_name=? ", (m_username,website_name,))
+            array=c.fetchall()
+            if len(array) <=i:
+                break
+    else:
+        ln=tkinter.Label(home,text="*No Entry Found",fg="red",bg="black")
+        ln.place(y=63,x=600)
+        
+    conn.close()
+    return None
+
+#delete function
+def delete_data(M_username,username,password,website):
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM user_data_storage WHERE M_username=? AND user_name=? AND service_pwd=? AND website_name=?", (M_username,username,password,website))
+    conn.commit()
+    conn.close()
+    
+    search_GUI()
+    return None
+
+#signUp DB
+def signUp(username,password):
         conn = sqlite3.connect('pass_manager.db')
         c = conn.cursor()
         
@@ -39,46 +85,73 @@ def loginPage():
 
         conn.commit() 
         conn.close()
+    
 
-    def signUp_Command():
-        def signUp_contets():
-            global M_username
-            global M_password
-            M_username=user_name_entry.get()
-            M_password=pass_word_entry.get()
-            M_password=make_pw_hash(M_password)
-            signUp(M_username,M_password)
-            en=tkinter.Label(root,text="*Account Created Successfully",fg="red",bg="black")
-            en.pack()
-            return None
-        root=tkinter.Tk()
-        root.title("The Bois Password Manager - SignUp")
-        root['bg']='black'
-        Headin_text=tkinter.Label(root,text="SignUp",
-        fg="green",bg="black")
-        Font23=Custom_Font1=tkinter.font.Font(family="Pixeboy",size=25)
-        Headin_text.configure(font=Font23)
-        Headin_text.pack()
-        Custom_Font=tkinter.font.Font( family = "Pixeboy", 
-                                    size = 25, 
-                                    )
-        Headin_text.configure(font=Custom_Font)
-        user_name=tkinter.Label(root,text="Username:",fg="green",bg="black")
-        Custom_Font1=tkinter.font.Font(family="Consolas",size=15)
-        user_name.configure(font=Custom_Font1)
-        user_name.pack()
-        user_name_entry = tkinter.Entry(root,fg="black", bg="#64f586", width=50)
-        welcomeusername=user_name_entry.get()
-        user_name_entry.pack()
+#GUI STARTS HERE
+#main UI
+home=tkinter.Tk()
+home.title("The Bois Password Manager")
+home.geometry("920x640")
+icon= tkinter.PhotoImage(file="images\icon_2.png")
+home.iconphoto(False, icon)
+Entry_Font=tkinter.font.Font(size=15)
 
-        pass_word=tkinter.Label(root,text="Master Password:",fg="green",bg="black")
-        pass_word.pack()
-        pass_word.configure(font=Custom_Font1)
-        pass_word_entry=tkinter.Entry(root,show="*",fg="black", bg="#64f586", width=50)
-        pass_word_entry.pack()
-        signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp_contets)
-        signUp_button.pack(pady=5)
-        root.mainloop()
+#signUP GUI
+def signUp_Command():
+    def signUp_contets():
+        global M_username
+        global M_password
+        M_username=user_name_entry.get()
+        M_password=pass_word_entry.get()
+        if (len(M_password)==0 or len(M_username)==0):
+            ln=tkinter.Label(root,text="*Enter a username/password",fg="red",bg="black")
+            ln.pack()
+        else:
+            try:
+                M_password=make_pw_hash(M_password)
+                signUp(M_username,M_password)
+                en=tkinter.Label(root,text="*Account Created Successfully",fg="red",bg="black")
+                en.pack()
+            except sqlite3.IntegrityError:
+                ln=tkinter.Label(root,text="*Username already exists",fg="red",bg="black")
+                ln.pack()
+                
+        return None
+    root=tkinter.Tk()
+    root.title("The Bois Password Manager - SignUp")
+    root.geometry("500x200")
+    root['bg']='black'
+    Headin_text=tkinter.Label(root,text="SignUp",
+    fg="green",bg="black")
+    Font23=Custom_Font1=tkinter.font.Font(family="Pixeboy",size=25)
+    Headin_text.configure(font=Font23)
+    Headin_text.pack()
+    Custom_Font=tkinter.font.Font( family = "Pixeboy", 
+                                size = 25, 
+                                )
+    Headin_text.configure(font=Custom_Font)
+    user_name=tkinter.Label(root,text="Username:",fg="green",bg="black")
+    Custom_Font1=tkinter.font.Font(family="Consolas",size=15)
+    user_name.configure(font=Custom_Font1)
+    user_name.pack()
+    user_name_entry = tkinter.Entry(root,fg="black", bg="#64f586", width=50)
+    welcomeusername=user_name_entry.get()
+    user_name_entry.pack()
+
+    pass_word=tkinter.Label(root,text="Master Password:",fg="green",bg="black")
+    pass_word.pack()
+    pass_word.configure(font=Custom_Font1)
+    pass_word_entry=tkinter.Entry(root,show="*",fg="black", bg="#64f586", width=50)
+    pass_word_entry.pack()
+    signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp_contets)
+    signUp_button.pack(pady=5)
+    root.mainloop()
+
+#login GUI
+def loginPage():
+    for widget in home.winfo_children():
+        widget.destroy()
+    #Login Main
     def Login():
         global username
         global password
@@ -120,10 +193,6 @@ def loginPage():
     text2.configure(font=Custom_Font1)
     entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
     entry2.place(x=180,y=120)
-    username=None
-    password=None
-    Show_button=tkinter.Button(text="Show password",command=showZ)
-    Show_button.pack()
     
 
     #Login button
@@ -145,7 +214,7 @@ def loginPage():
     )
     signUp_button.pack()
     Login_button.pack()
-    direc="images\matrix.gif"
+    '''direc="images\matrix.gif"
     frameCnt = 20
     frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
     def update(ind):
@@ -158,7 +227,7 @@ def loginPage():
         home.after(100, update, ind)
     label = tkinter.Label(home)
     label.pack()
-    home.after(0, update, 0)
+    home.after(0, update, 0)'''
 
     home.mainloop()
 
@@ -191,8 +260,10 @@ def homePage():
     add.pack(pady=20)
     see=tkinter.Button(home,text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
     see.pack()
-    search=tkinter.Button(home,text="Search your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
+    search=tkinter.Button(home,text="Search your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586', command=search_GUI)
     search.pack(pady=20)
+    logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
+    logout.place(y=5, x=865)
     home.mainloop()
 
 #ADDING FIELD PAGE
@@ -268,6 +339,56 @@ def addField_Page():
     Go_Button.place(x=150,y=275)
     back=tkinter.Button(home,text='Back',bg="#000000", fg='green',activebackground='#64f586',command=homePage)
     back.place(x=3,y=3)
+    logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
+    logout.place(y=5, x=865)
+
+    home.mainloop()
+
+#Search GUI
+def search_GUI():
+    for widget in home.winfo_children():
+        widget.destroy()
+    
+    def serach_Entry():
+        global search
+        search=webs_name_entry.get()
+        if len(search)!=0:
+            search_db(m_username, search)
+        else:
+            ln=tkinter.Label(home,text="*Fill the search box",fg="red",bg="black")
+            ln.place(y=63,x=600)
+        return None
+    home['bg']='black'
+    home.title("The Bois Password Manager - Search A Password")
+    Headin_text=tkinter.Label(home,text="The Bois password manager",bg="black",fg="green")
+    Custom_Font=tkinter.font.Font( family = "Pixeboy", 
+                                    size = 25, 
+                                    )
+    Entry_Font=tkinter.font.Font(size=15)  
+    Grid_hed_Font=tkinter.font.Font(family = "Pixeboy",size=25)                         
+    Headin_text.configure(font=Custom_Font)
+    Headin_text.pack()
+    back=tkinter.Button(home,text='Back',bg="#000000", fg='green',activebackground='#64f586',command=homePage)
+    back.place(x=3,y=3)
+    webs_name=tkinter.Label(home,text='Enter The Website Name:', fg='green', bg='black')
+    webs_name.config(font=Entry_Font)
+    webs_name.place(x=5, y=60)
+    webs_name_entry=tkinter.Entry(home,width=40,fg="black", bg="#64f586")
+    webs_name_entry.place(y=65, x=250)
+    search_btn=tkinter.Button(home,text='Search',bg="#000000", fg='green',activebackground='#64f586', command=serach_Entry)
+    search_btn.place(y=63,x=500)
+    #search grid
+    web_grid_sh=tkinter.Label(home,text='Website', fg='green', bg='black')
+    web_grid_sh.config(font=Grid_hed_Font)
+    web_grid_sh.place(x=80,y=130)
+    usr_grid_sh=tkinter.Label(home,text='Username', fg='green', bg='black')
+    usr_grid_sh.config(font=Grid_hed_Font)
+    usr_grid_sh.place(x=370,y=130)
+    pas_grid_sh=tkinter.Label(home,text='Password', fg='green', bg='black')
+    pas_grid_sh.config(font=Grid_hed_Font)
+    pas_grid_sh.place(x=670,y=130)
+    logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
+    logout.place(y=5, x=865)
 
     home.mainloop()
 
