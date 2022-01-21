@@ -2,6 +2,7 @@
 #If your datbase file is empty run the databse_creation.py file
 import tkinter
 import tkinter.font
+from tkinter import messagebox
 import sqlite3
 from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
@@ -18,13 +19,13 @@ if __name__ == "__main__":
         if not username:
             messagebox.error("ERROR","Please enter a valid username in the username box.")
             return
-        else username:
+        else:
         
         
         if not password:
             messagebox.error("ERROR","Please enter a valid password in the password box.")
             return
-        else password:
+        else:
             
             
         c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
