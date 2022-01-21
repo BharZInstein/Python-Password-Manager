@@ -162,6 +162,39 @@ def loginPage():
 
     home.mainloop()
 
+#HOMEPAGE GUI
+def homePage():
+    for widget in home.winfo_children():
+        widget.destroy()
+    
+      
+    def addPage():
+        addField_Page()
+    home['bg']='black'
+    title_text=tkinter.Label(home,text="HOMEPAGE",bg="black",fg="green")
+    Custom_Font1=tkinter.font.Font(home,family="Ancient Modern Tales",size=64,)
+    title_text.pack(pady=100)
+    title_text.configure(font=Custom_Font1)
+    welcome_text=tkinter.Label(home,text="Welcome👋",bg="black",fg="green")
+    Font111=tkinter.font.Font(home,family="Pixeboy",size=30)
+    welcome_text.configure(font=Font111)
+    welcome_text.pack()
+    userZ_text=tkinter.Label(home,text=m_username,bg="black",fg="#3a17ff")
+    CustomFont131=tkinter.font.Font(home,family="Comic Sans MS",size=28)
+    userZ_text.configure(font=CustomFont131)
+    userZ_text.pack()
+    Headin_text=tkinter.Label(home,text="----Choose an Option----",bg="black",fg="green")
+    Custom_Font2=tkinter.font.Font(family="Consolas",size=14,weight="bold")
+    Headin_text.configure(font=Custom_Font2)
+    Headin_text.pack()
+    add=tkinter.Button(home,text="Add new Password",width=20,height=2, bg="black",fg="green", activebackground='#64f586',command=addPage)
+    add.pack(pady=20)
+    see=tkinter.Button(home,text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
+    see.pack()
+    search=tkinter.Button(home,text="Search your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
+    search.pack(pady=20)
+    home.mainloop()
+
 #ADDING FIELD PAGE
 def addField_Page():
     for widget in home.winfo_children():
@@ -238,35 +271,6 @@ def addField_Page():
 
     home.mainloop()
 
-#HOMEPAGE GUI
-def homePage():
-    for widget in home.winfo_children():
-        widget.destroy()
-    
-      
-    def addPage():
-        addField_Page()
-    home['bg']='black'
-    title_text=tkinter.Label(home,text="HOMEPAGE",bg="black",fg="green")
-    Custom_Font1=tkinter.font.Font(home,family="Ancient Modern Tales",size=64,)
-    title_text.pack(pady=100)
-    title_text.configure(font=Custom_Font1)
-    welcome_text=tkinter.Label(home,text="Welcome👋",bg="black",fg="green")
-    Font111=tkinter.font.Font(home,family="Pixeboy",size=30)
-    welcome_text.configure(font=Font111)
-    welcome_text.pack()
-    userZ_text=tkinter.Label(home,text=m_username,bg="black",fg="#3a17ff")
-    CustomFont131=tkinter.font.Font(home,family="Comic Sans MS",size=28)
-    userZ_text.configure(font=CustomFont131)
-    userZ_text.pack()
-    Headin_text=tkinter.Label(home,text="----Choose an Option----",bg="black",fg="green")
-    Custom_Font2=tkinter.font.Font(family="Consolas",size=14,weight="bold")
-    Headin_text.configure(font=Custom_Font2)
-    Headin_text.pack()
-    add=tkinter.Button(home,text="Add new Password",width=20,height=2, bg="black",fg="green", activebackground='#64f586',command=addPage)
-    add.pack(pady=50)
-    see=tkinter.Button(home,text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
-    see.pack()
-    home.mainloop()
 
+    
 loginPage()
