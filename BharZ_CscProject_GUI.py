@@ -12,9 +12,19 @@ m_username=None
 if __name__ == "__main__":
     def login(username,password):
         conn = sqlite3.connect('pass_manager.db')
+            
         c = conn.cursor()
         
-    
+        if username:   
+        elif not username:
+            messagebox.error("ERROR","Please enter a valid username in the username box.")
+            return
+        
+        if password:
+        elif not password:
+            messagebox.error("ERROR","Please enter a valid password in the password box.")
+            return
+            
         c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
                 {
                     'M_username': username,
@@ -23,6 +33,8 @@ if __name__ == "__main__":
 
         conn.commit() 
         conn.close()
+        
+        
 
     def signUp_Command():
         def signUp():
