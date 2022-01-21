@@ -1,5 +1,7 @@
 #GUI FOR CSC PROJECT by Bharghav
 #If your datbase file is empty run the databse_creation.py file
+def showZ():
+        show=False
 import tkinter
 import tkinter.font
 import sqlite3
@@ -54,7 +56,7 @@ def loginPage():
         root['bg']='black'
         Headin_text=tkinter.Label(root,text="SignUp",
         fg="green",bg="black")
-        Font23=Custom_Font1=tkinter.font.Font(family="Ancient Modern Tales",size=25)
+        Font23=Custom_Font1=tkinter.font.Font(family="Pixeboy",size=25)
         Headin_text.configure(font=Font23)
         Headin_text.pack()
         Custom_Font=tkinter.font.Font( family = "Pixeboy", 
@@ -66,6 +68,7 @@ def loginPage():
         user_name.configure(font=Custom_Font1)
         user_name.pack()
         user_name_entry = tkinter.Entry(root,fg="black", bg="#64f586", width=50)
+        welcomeusername=user_name_entry.get()
         user_name_entry.pack()
 
         pass_word=tkinter.Label(root,text="Master Password:",fg="green",bg="black")
@@ -119,6 +122,10 @@ def loginPage():
     entry2.place(x=180,y=120)
     username=None
     password=None
+    Show_button=tkinter.Button(text="Show password",command=showZ)
+    Show_button.pack()
+    
+
     #Login button
     Login_button= tkinter.Button(
         text="Login",
@@ -244,6 +251,14 @@ def homePage():
     Custom_Font1=tkinter.font.Font(home,family="Ancient Modern Tales",size=64,)
     title_text.pack(pady=100)
     title_text.configure(font=Custom_Font1)
+    welcome_text=tkinter.Label(home,text="Welcome👋",bg="black",fg="green")
+    Font111=tkinter.font.Font(home,family="Pixeboy",size=30)
+    welcome_text.configure(font=Font111)
+    welcome_text.pack()
+    userZ_text=tkinter.Label(home,text=m_username,bg="black",fg="#3a17ff")
+    CustomFont131=tkinter.font.Font(home,family="Comic Sans MS",size=28)
+    userZ_text.configure(font=CustomFont131)
+    userZ_text.pack()
     Headin_text=tkinter.Label(home,text="----Choose an Option----",bg="black",fg="green")
     Custom_Font2=tkinter.font.Font(family="Consolas",size=14,weight="bold")
     Headin_text.configure(font=Custom_Font2)
