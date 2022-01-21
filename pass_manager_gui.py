@@ -10,7 +10,6 @@ from random_password_gen import passgen
 from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
-from Homepage_gui import homePage
 M_password=None
 url=None
 usr=None
@@ -148,14 +147,13 @@ def loginPage():
         ind += 1
         if ind == frameCnt:
             ind = 0
-        label.configure(image=frame)
+        label.configure(image=frame) 
         home.after(100, update, ind)
     label = tkinter.Label(home)
     label.pack()
     home.after(0, update, 0)
 
     home.mainloop()
-
 
 #ADDING FIELD PAGE
 def addField_Page():
@@ -226,11 +224,14 @@ def addField_Page():
     web_text.place(x=5,y=225)
     web_entry=tkinter.Entry(home,width=50,fg="black", bg="#64f586")
     web_entry.place(x=150,y=225)
-    Go_Button=tkinter.Button(home,text="ADD",bg="#00ff95",fg="green",width=25,height=2,activebackground='#64f586', command=addEntry)
+    Go_Button=tkinter.Button(home,text="ADD",bg="#000000",fg="green",width=25,height=2,activebackground='#64f586', command=addEntry)
     Go_Button.place(x=150,y=275)
+    back=tkinter.Button(home,text='Back',bg="#000000", fg='green',activebackground='#64f586',command=homePage)
+    back.place(x=3,y=3)
 
     home.mainloop()
-#HOMEPAGE
+
+#HOMEPAGE GUI
 def homePage():
     for widget in home.winfo_children():
         widget.destroy()
