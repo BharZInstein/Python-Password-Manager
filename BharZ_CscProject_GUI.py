@@ -15,15 +15,17 @@ if __name__ == "__main__":
             
         c = conn.cursor()
         
-        if username:   
-        elif not username:
+        if not username:
             messagebox.error("ERROR","Please enter a valid username in the username box.")
             return
+        else username:
         
-        if password:
-        elif not password:
+        
+        if not password:
             messagebox.error("ERROR","Please enter a valid password in the password box.")
             return
+        else password:
+            
             
         c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
                 {
