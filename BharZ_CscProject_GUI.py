@@ -20,12 +20,13 @@ if __name__ == "__main__":
             messagebox.error("ERROR","Please enter a valid username in the username box.")
             return
         else:
-        
+            pass
         
         if not password:
             messagebox.error("ERROR","Please enter a valid password in the password box.")
             return
         else:
+            pass
             
             
         c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
