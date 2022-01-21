@@ -9,4 +9,3 @@ def check_pw_hash(password, hash2):
         return True
     else:
         return False
-

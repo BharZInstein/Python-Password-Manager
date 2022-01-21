@@ -40,7 +40,7 @@ def loginPage():
         conn.close()
 
     def signUp_Command():
-        def signUp():
+        def signUp_contets():
             global M_username
             global M_password
             M_username=user_name_entry.get()
@@ -74,7 +74,7 @@ def loginPage():
         pass_word.configure(font=Custom_Font1)
         pass_word_entry=tkinter.Entry(root,show="*",fg="black", bg="#64f586", width=50)
         pass_word_entry.pack()
-        signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp)
+        signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp_contets)
         signUp_button.pack(pady=5)
         root.mainloop()
     def Login():
