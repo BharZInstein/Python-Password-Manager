@@ -267,7 +267,11 @@ def loginPage():
         home.after(100, update, ind)
     label = tkinter.Label(home)
     label.pack()
+<<<<<<< Updated upstream
     home.after(0, update, 0)'''
+=======
+    home.after(0, update, 0) '''
+>>>>>>> Stashed changes
 
     home.mainloop()
 
@@ -463,6 +467,8 @@ def viewpass():
 
 
     home.mainloop()
+#View Passwords
+#def viewpass():
 
 
 
