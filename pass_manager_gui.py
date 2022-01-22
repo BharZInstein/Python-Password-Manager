@@ -256,7 +256,7 @@ def homePage():
     welcome_text.configure(font=Font111)
     welcome_text.pack()
     userZ_text=tkinter.Label(home,text=m_username,bg="black",fg="#3a17ff")
-    CustomFont131=tkinter.font.Font(home,family="Comic Sans MS",size=28)
+    CustomFont131=tkinter.font.Font(home,family="Times New Roman",size=28)
     userZ_text.configure(font=CustomFont131)
     userZ_text.pack()
     Headin_text=tkinter.Label(home,text="----Choose an Option----",bg="black",fg="green")
