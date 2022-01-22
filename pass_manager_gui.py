@@ -20,6 +20,46 @@ m_username=None
 username=None
 password=None
 search=None
+#View data
+def view_db(m_username):
+    Entry_Font=tkinter.font.Font(size=15)
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM user_data_storage WHERE M_username=?", (m_username,))
+    rows=c.fetchall()
+    if (rows!=[]):
+        i=0
+        y=0
+        while True:
+            c.execute("SELECT * FROM user_data_storage WHERE M_username=? ", (m_username,))
+            array=c.fetchall()
+
+            lbl=tkinter.Label(home,text=(array[i][4]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=90,y=y+160)
+            lbl=tkinter.Label(home,text=(array[i][2]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=380,y=y+160)
+            lbl=tkinter.Label(home,text=(array[i][3]),bg="#000000", fg='green',activebackground='#64f586')
+            lbl.config(font=Entry_Font)
+            lbl.place(x=650,y=y+160)
+
+            delbt=tkinter.Button(home,text='Delete',bg="#000000", fg='green',activebackground='#64f586',command= partial(delete_data, array[i][0], array[0][2],array[0][3],array[0][4]))
+            delbt.place(x=870,y=y+160)
+            i=i+1
+            y=y+35
+
+            c.execute("SELECT * FROM user_data_storage WHERE M_username=? ", (m_username,))
+            array=c.fetchall()
+            if len(array) <=i:
+                break
+    else:
+        ln=tkinter.Label(home,text="*No Entry Found",fg="red",bg="black")
+        ln.place(y=63,x=600)
+        
+    conn.close()
+    return None
+
 #search data
 def search_db(m_username,website_name):
     Entry_Font=tkinter.font.Font(size=15)
@@ -258,7 +298,7 @@ def homePage():
     Headin_text.pack()
     add=tkinter.Button(home,text="Add new Password",width=20,height=2, bg="black",fg="green", activebackground='#64f586',command=addPage)
     add.pack(pady=20)
-    see=tkinter.Button(home,text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586')
+    see=tkinter.Button(home,text="View your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586', command = viewpass )
     see.pack()
     search=tkinter.Button(home,text="Search your passwords", width=20, height=2,bg="black",fg="green", activebackground='#64f586', command=search_GUI)
     search.pack(pady=20)
@@ -391,6 +431,40 @@ def search_GUI():
     logout.place(y=5, x=865)
 
     home.mainloop()
+#View Password
+def viewpass():
+    for widget in home.winfo_children():
+        widget.destroy()
+    home['bg']='black'
+    home.title("The Bois Password Manager - View Passwords")
+    Headin_text=tkinter.Label(home,text="The Bois password manager",bg="black",fg="green")
+    Custom_Font=tkinter.font.Font( family = "Pixeboy", 
+                                    size = 25, 
+                                    )
+    Entry_Font=tkinter.font.Font(size=15)  
+    Grid_hed_Font=tkinter.font.Font(family = "Pixeboy",size=25)                         
+    Headin_text.configure(font=Custom_Font)
+    Headin_text.pack()
+    back=tkinter.Button(home,text='Back',bg="#000000", fg='green',activebackground='#64f586',command=homePage)
+    back.place(x=3,y=3)
+    
+    web_grid_sh = tkinter.Label(home,text='Website', fg='green', bg='black')
+    web_grid_sh.config(font=Grid_hed_Font)
+    web_grid_sh.place(x=80,y=100)
+    web_grid_sh = tkinter.Label(home,text='Username', fg='green', bg='black')
+    web_grid_sh.config(font=Grid_hed_Font)
+    web_grid_sh.place(x=370,y=100)
+    web_grid_sh = tkinter.Label(home,text='Password', fg='green', bg='black')
+    web_grid_sh.config(font=Grid_hed_Font)
+    web_grid_sh.place(x=650,y=100)
+    logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
+    logout.place(y=5, x=865)
+    view_db(m_username)
+
+
+    home.mainloop()
+
+
 
 
     
