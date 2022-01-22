@@ -2,6 +2,7 @@
 #If your datbase file is empty run the databse_creation.py file
 import tkinter
 import tkinter.font
+from tkinter import messagebox
 import sqlite3
 from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
@@ -12,9 +13,22 @@ m_username=None
 if __name__ == "__main__":
     def login(username,password):
         conn = sqlite3.connect('pass_manager.db')
+            
         c = conn.cursor()
         
-    
+        if not username:
+            messagebox.showerror("ERROR","Please enter a valid username in the username box.")
+            return
+        else:
+            pass
+        
+        if not password:
+            messagebox.showerror("ERROR","Please enter a valid password in the password box.")
+            return
+        else:
+            pass
+            
+            
         c.execute("INSERT INTO user_data VALUES(:M_username, :master_pwd)",
                 {
                     'M_username': username,
@@ -23,6 +37,8 @@ if __name__ == "__main__":
 
         conn.commit() 
         conn.close()
+        
+        
 
     def signUp_Command():
         def signUp():
