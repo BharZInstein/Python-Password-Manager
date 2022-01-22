@@ -87,7 +87,7 @@ def search_db(m_username,website_name):
             delbt=tkinter.Button(home,text='Delete',bg="#000000", fg='green',activebackground='#64f586',command= partial(delete_data, array[i][0], array[0][2],array[0][3],array[0][4]))
             delbt.place(x=870,y=y+190)
             i=i+1
-            y=y+50
+            y=y+35
 
             c.execute("SELECT * FROM user_data_storage WHERE M_username=? AND website_name=? ", (m_username,website_name,))
             array=c.fetchall()
@@ -266,12 +266,7 @@ def loginPage():
         label.configure(image=frame) 
         home.after(100, update, ind)
     label = tkinter.Label(home)
-    label.pack()
-<<<<<<< Updated upstream
-    home.after(0, update, 0)'''
-=======
-    home.after(0, update, 0) '''
->>>>>>> Stashed changes
+    label.pack()'''
 
     home.mainloop()
 
@@ -430,7 +425,7 @@ def search_GUI():
     usr_grid_sh.place(x=370,y=130)
     pas_grid_sh=tkinter.Label(home,text='Password', fg='green', bg='black')
     pas_grid_sh.config(font=Grid_hed_Font)
-    pas_grid_sh.place(x=670,y=130)
+    pas_grid_sh.place(x=650,y=130)
     logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
     logout.place(y=5, x=865)
 
