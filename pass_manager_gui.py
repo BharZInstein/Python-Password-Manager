@@ -1,4 +1,4 @@
-#GUI FOR CSC PROJECT by Bharghav
+#Read the readme.txt file before running
 #If your datbase file is empty run the databse_creation.py file
 import tkinter
 import tkinter.font
