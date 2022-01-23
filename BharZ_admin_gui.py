@@ -47,11 +47,6 @@ def admin_login():
             pass
           
           
-  c.execute("INSERT INTO admin_user_data VALUES(:admin_username, :admin_pwd)",
-                {
-                    'admin_username': Username,
-                    'admin_pwd': Password
-                })
   
 Login_button= tkinter.Button(
     text="Login",
