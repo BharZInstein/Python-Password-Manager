@@ -24,6 +24,19 @@ c.execute("""CREATE TABLE IF NOT EXISTS admin_user_data(
         PRIMARY KEY(admin_username)
     )""")
 
+
+
+c.execute("""INSERT INTO admin_user_data
+             (admin_username, admin_pwd) 
+             VALUES
+               ('adhiraj','1234'),
+               ('bharghav','1234'),
+               ('kanish','1234'),
+               ('seyan','1234');
+      """)
+
+                
+
 conn.commit()
 
 conn.close()
