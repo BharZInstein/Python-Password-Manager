@@ -11,6 +11,7 @@ from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
 from functools import partial
+from BharZ_admin_gui import *
 M_password=None
 M_username=None
 url=None
@@ -244,6 +245,9 @@ def loginPage():
     text2.configure(font=Custom_Font1)
     entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
     entry2.place(x=180,y=120)
+    admin=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=admin_page)
+    admin.place(y=5, x=865)
+    admin.mainloop()
     
 
     #Login button
@@ -447,7 +451,7 @@ def search_GUI():
 def viewpass():
     for widget in home.winfo_children():
         widget.destroy()
-    home['bg']='black'
+    hoem['bg']='black'
     home.title("The Bois Password Manager - View Passwords")
     Headin_text=tkinter.Label(home,text="The Bois password manager",bg="black",fg="green")
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
