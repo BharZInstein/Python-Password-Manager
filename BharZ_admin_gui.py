@@ -5,6 +5,7 @@ import sqlite3
 from functools import partial
 username=None
 password=None
+#delete butoon function
 def delete_data(username):
     conn = sqlite3.connect('pass_manager.db')
     c = conn.cursor()
@@ -15,6 +16,7 @@ def delete_data(username):
     admin_view_page()
     return None
 
+#username view
 def view_db():
     Entry_Font=tkinter.font.Font(size=15)
     conn = sqlite3.connect('pass_manager.db')
@@ -45,12 +47,17 @@ def view_db():
     conn.close()
     return None
 
-
+#Main GUI
 win=tkinter.Tk()
 win.title("Admin Portal")
 win.geometry("918x450")
 Entry_Font=tkinter.font.Font(size=15)
+icon= tkinter.PhotoImage(file="images\icon_2.png")
+win.iconphoto(False, icon)
+#admin page GUI
 def admin_page():
+    for widget in win.winfo_children():
+        widget.destroy()
     def admin_login():
         global username
         global password
@@ -106,12 +113,13 @@ def admin_page():
 
     win.mainloop()
 
+#Admin View Page
 def admin_view_page():
     for widget in win.winfo_children():
         widget.destroy()
-    win.geometry("500x750")
-    win.title("The Bois Password Manager - View Passwords")
-    Headin_text=tkinter.Label(win,text="The Bois password manager",bg="black",fg="green")
+    win.geometry("600x750")
+    win.title("The Bois Password Manager - Admin Pannel")
+    Headin_text=tkinter.Label(win,text="Admin Pannel - Customer ID",bg="black",fg="green")
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
                                     size = 25, 
                                     )
@@ -123,6 +131,8 @@ def admin_view_page():
     web_grid_sh=tkinter.Label(win,text='CUSTOMER USERNAMES', fg='green', bg='black')
     web_grid_sh.config(font=Grid_hed_Font)
     web_grid_sh.place(x=30,y=50)
+    logout=tkinter.Button(win,text="Logout",bg="black",fg="green",activebackground='#64f586',command=admin_page)
+    logout.place(y=5, x=550)
     view_db()
 
     win.mainloop()
