@@ -7,11 +7,9 @@ import random
 import pyperclip
 import string
 from random_password_gen import passgen
-from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
 from functools import partial
-
 M_password=None
 M_username=None
 url=None
@@ -147,7 +145,6 @@ home.geometry("920x640")
 icon= tkinter.PhotoImage(file="images\icon_2.png")
 home.iconphoto(False, icon)
 Entry_Font=tkinter.font.Font(size=15)
-
 #signUP GUI
 def signUp_Command():
     def signUp_contets():
@@ -228,6 +225,8 @@ def loginPage():
     home['bg']='black'
     Headin_text=tkinter.Label(text="The Bois password manager Login Portal",
     fg="green",bg="black")
+    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=600,y=500)
     Headin_text.pack()
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
                                     size = 25, 
@@ -266,21 +265,8 @@ def loginPage():
     )
     signUp_button.pack()
     Login_button.pack()
-    direc="images\matrix.gif"
-    frameCnt = 20
-    frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
-    def update(ind):
-
-        frame = frames[ind]
-        ind += 1
-        if ind == frameCnt:
-            ind = 0
-        label.configure(image=frame)
-        home.after(100, update, ind)
-    label = tkinter.Label(home)
-    label.pack()
-    home.after(0, update, 0)
-
+    
+        
     home.mainloop()
 
 #HOMEPAGE GUI
