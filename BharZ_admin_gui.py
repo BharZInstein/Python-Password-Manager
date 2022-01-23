@@ -87,7 +87,7 @@ def admin_page():
     text2=tkinter.Label(win,text="Admin Password:",fg="green",bg="black")
     text2.pack(pady=20,side=tkinter.TOP,anchor="w")
     text2.configure(font=Custom_Font1)
-    entry2=tkinter.Entry(fg="black", bg="#64f586", width=50)
+    entry2=tkinter.Entry(win,show="*",fg="black", bg="#64f586", width=50)
     entry2.place(x=172,y=134)
 
     Login_button= tkinter.Button(
