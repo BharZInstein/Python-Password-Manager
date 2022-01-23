@@ -1,5 +1,7 @@
 import tkinter
 import tkinter.font
+from tkinter import messagebox
+
 win=tkinter.Tk()
 win.title("Admin Portal")
 win.geometry("918x450")
@@ -25,12 +27,39 @@ entry2=tkinter.Entry(fg="black", bg="#64f586", width=50)
 entry2.place(x=172,y=134)
 Username=entry1.get()
 Password=entry2.get()
+
+def admin_login():
+  
+  conn = sqlite3.connect('pass_manager.db')
+            
+  c = conn.cursor()
+  
+  if not Username:
+            messagebox.error("ERROR","Please enter a valid username in the username box.")
+            return
+        else:
+            pass
+          
+  if not Password:
+            messagebox.error("ERROR","Please enter a valid password in the password box.")
+            return
+        else:
+            pass
+          
+          
+  c.execute("INSERT INTO admin_user_data VALUES(:admin_username, :admin_pwd)",
+                {
+                    'admin_username': Username,
+                    'admin_pwd': Password
+                })
+  
 Login_button= tkinter.Button(
     text="Login",
     width=10,
     height=2,
     bg="#61ff96",
     fg="black",
+    command=admin_login
 )
 Login_button.pack()
 
