@@ -46,6 +46,11 @@ def admin_login():
         else:
             pass
           
+  
+   
+   conn.commit() 
+   conn.close()
+          
           
   
 Login_button= tkinter.Button(
