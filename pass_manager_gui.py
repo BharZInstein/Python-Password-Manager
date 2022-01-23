@@ -11,7 +11,7 @@ from hashing import make_pw_hash, check_pw_hash
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
 from functools import partial
-
+from functools import partial
 M_password=None
 M_username=None
 url=None
