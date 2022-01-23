@@ -6,10 +6,12 @@ import sqlite3
 import random
 import pyperclip
 import string
+from PIL import ImageTk, Image
 from random_password_gen import passgen
 from subprocess import call
 from hashing import make_pw_hash, check_pw_hash
 from functools import partial
+from PIL import ImageTk, Image
 M_password=None
 M_username=None
 url=None
@@ -141,7 +143,7 @@ def signUp(username,password):
 #main UI
 home=tkinter.Tk()
 home.title("The Bois Password Manager")
-home.geometry("920x640")
+home.geometry("920x650")
 icon= tkinter.PhotoImage(file="images\icon_2.png")
 home.iconphoto(False, icon)
 Entry_Font=tkinter.font.Font(size=15)
@@ -226,7 +228,7 @@ def loginPage():
     Headin_text=tkinter.Label(text="The Bois password manager Login Portal",
     fg="green",bg="black")
     credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
-    credit.place(x=600,y=500)
+    credit.place(x=640,y=630)
     Headin_text.pack()
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
                                     size = 25, 
@@ -244,7 +246,6 @@ def loginPage():
     text2.configure(font=Custom_Font1)
     entry2=tkinter.Entry(show="*",fg="black", bg="#64f586", width=50)
     entry2.place(x=180,y=120)
-    
 
     #Login button
     Login_button= tkinter.Button(
@@ -265,6 +266,9 @@ def loginPage():
     )
     signUp_button.pack()
     Login_button.pack()
+    img = ImageTk.PhotoImage(Image.open("images\Culture_Matrix_Code_corridor.png"))
+    panel = tkinter.Label(home, image = img)
+    panel.pack()
     
         
     home.mainloop()
@@ -302,6 +306,8 @@ def homePage():
     search.pack(pady=20)
     logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
     logout.place(y=5, x=865)
+    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=640,y=630)
     home.mainloop()
 
 #ADDING FIELD PAGE
@@ -379,6 +385,8 @@ def addField_Page():
     back.place(x=3,y=3)
     logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
     logout.place(y=5, x=865)
+    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=640,y=630)
 
     home.mainloop()
 
@@ -428,6 +436,8 @@ def search_GUI():
     pas_grid_sh.place(x=650,y=130)
     logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
     logout.place(y=5, x=865)
+    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=640,y=630)
 
     home.mainloop()
 #View Password
@@ -458,6 +468,8 @@ def viewpass():
     web_grid_sh.place(x=650,y=100)
     logout=tkinter.Button(home,text="Logout",bg="black",fg="green",activebackground='#64f586',command=loginPage)
     logout.place(y=5, x=865)
+    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=640,y=630)
     view_db(m_username)
 
 
