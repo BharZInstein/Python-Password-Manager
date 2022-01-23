@@ -96,7 +96,7 @@ def admin_page():
     text2.configure(font=Custom_Font1)
     entry2=tkinter.Entry(win,show="*",fg="black", bg="#64f586", width=50)
     entry2.place(x=172,y=134)
-    credit=tkinter.Label(win,text="©️Created by Kanish,Bharghav, Seyan, Adhiraj",fg="grey",bg="black")
+    credit=tkinter.Label(win,text="©️Created by Kanish, Bharghav, Seyan, Adhiraj",fg="grey",bg="black")
     credit.place(x=650,y=429)
     Login_button= tkinter.Button(
         text="Login",
@@ -134,6 +134,8 @@ def admin_view_page():
     web_grid_sh.place(x=30,y=50)
     logout=tkinter.Button(win,text="Logout",bg="black",fg="green",activebackground='#64f586',command=admin_page)
     logout.place(y=5, x=550)
+    credit=tkinter.Label(win,text="©️Created by Kanish, Bharghav, Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=332,y=729)
     view_db()
 
     win.mainloop()

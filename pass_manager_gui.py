@@ -196,6 +196,8 @@ def signUp_Command():
     pass_word_entry.pack()
     signUp_button= tkinter.Button(root,text="SignUp",width=10,height=2,bg="#61ff96",fg="black",command = signUp_contets)
     signUp_button.pack(pady=5)
+    credit=tkinter.Label(root,text="©️Created by Bharghav, Kanish, Seyan, Adhiraj",fg="grey",bg="black")
+    credit.place(x=220,y=179)
     root.mainloop()
 
 #login GUI
@@ -227,7 +229,7 @@ def loginPage():
     home['bg']='black'
     Headin_text=tkinter.Label(text="The Bois password manager Login Portal",
     fg="green",bg="black")
-    credit=tkinter.Label(home,text="©️Created by Bharghav,Kanish Seyan, Adhiraj",fg="grey",bg="black")
+    credit=tkinter.Label(home,text="©️Created by Bharghav, Kanish, Seyan, Adhiraj",fg="grey",bg="black")
     credit.place(x=640,y=630)
     Headin_text.pack()
     Custom_Font=tkinter.font.Font( family = "Pixeboy", 
