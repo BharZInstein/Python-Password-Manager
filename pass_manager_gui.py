@@ -44,7 +44,7 @@ def view_db(m_username):
             lbl.config(font=Entry_Font)
             lbl.place(x=650,y=y+160)
 
-            delbt=tkinter.Button(home,text='Delete',bg="#000000", fg='green',activebackground='#64f586',command= partial(delete_data, array[i][0], array[0][2],array[0][3],array[0][4]))
+            delbt=tkinter.Button(home,text='Delete',bg="#000000", fg='green',activebackground='#64f586',command= partial(delete_data_view, array[i][0], array[0][2],array[0][3],array[0][4]))
             delbt.place(x=870,y=y+160)
             i=i+1
             y=y+35
@@ -109,6 +109,17 @@ def delete_data(M_username,username,password,website):
     conn.close()
     
     search_GUI()
+    return None
+
+#delete fuction
+def delete_data_view(M_username,username,password,website):
+    conn = sqlite3.connect('pass_manager.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM user_data_storage WHERE M_username=? AND user_name=? AND service_pwd=? AND website_name=?", (M_username,username,password,website))
+    conn.commit()
+    conn.close()
+    
+    viewpass()
     return None
 
 #signUp DB
@@ -254,7 +265,7 @@ def loginPage():
     )
     signUp_button.pack()
     Login_button.pack()
-    '''direc="images\matrix.gif"
+    direc="images\matrix.gif"
     frameCnt = 20
     frames = [tkinter.PhotoImage(file=direc,format = 'gif -index %i' %(i)) for i in range(frameCnt)]
     def update(ind):
@@ -263,10 +274,11 @@ def loginPage():
         ind += 1
         if ind == frameCnt:
             ind = 0
-        label.configure(image=frame) 
+        label.configure(image=frame)
         home.after(100, update, ind)
     label = tkinter.Label(home)
-    label.pack()'''
+    label.pack()
+    home.after(0, update, 0)
 
     home.mainloop()
 
@@ -462,12 +474,5 @@ def viewpass():
     view_db(m_username)
 
 
-    home.mainloop()
-#View Passwords
-#def viewpass():
-
-
-
-
-    
+    home.mainloop()   
 loginPage()
