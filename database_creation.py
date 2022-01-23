@@ -18,6 +18,12 @@ c.execute("""CREATE TABLE IF NOT EXISTS user_data_storage(
         website_name TEXT NOT NULL,   
         FOREIGN KEY(M_username) REFERENCES user_data(M_username))""")
 
+c.execute("""CREATE TABLE IF NOT EXISTS admin_user_data(
+        admin_username TEXT(20) UNIQUE NOT NULL,
+        admin_pwd TEXT(20) NOT NULL,
+        PRIMARY KEY(admin_username)
+    )""")
+
 conn.commit()
 
 conn.close()
