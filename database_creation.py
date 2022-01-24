@@ -3,7 +3,7 @@ import sqlite3
 conn = sqlite3.connect('pass_manager.db')
 
 c = conn.cursor()
-
+#User storage
 c.execute("""CREATE TABLE IF NOT EXISTS user_data(
         M_username TEXT(20) UNIQUE NOT NULL,
         master_pwd TEXT(20) NOT NULL,
