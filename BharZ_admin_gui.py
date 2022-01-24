@@ -1,4 +1,4 @@
-#Read the readme.txt file before running
+#Read the readme.txt file before running IMPORTANT
 import tkinter
 import tkinter.font
 from tkinter import messagebox
